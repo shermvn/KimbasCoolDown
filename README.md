@@ -6,6 +6,7 @@ What I have right now:
 - Parrallex
 - Movable main Charcter
 - Obstacles with Colliders to trigger Game over
+- Prefabs
 
 
 Things to Come:
