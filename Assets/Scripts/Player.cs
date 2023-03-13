@@ -46,7 +46,6 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
-                Debug.Log("alex");
                 direction = Vector3.up * strength;
 
             }
@@ -77,6 +76,7 @@ public class Player : MonoBehaviour
         if (GameBehavior.Instance.CurrentState == State.Title)
         {
             ResetPlayer();
+            
         }
     }
 
@@ -87,6 +87,7 @@ public class Player : MonoBehaviour
         Vector3 position = transform.position;
         position.y = 0f;
         transform.position = position;
+        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         direction = Vector3.zero;
     }
     //Player.SetActive(false);
