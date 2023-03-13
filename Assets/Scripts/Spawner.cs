@@ -23,7 +23,14 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
-        Instantiate(prefab);
+        if (GameBehavior.Instance.CurrentState == State.Play)
+        {
+            Instantiate(prefab);
+        }
+        else
+        {
+            CancelInvoke(nameof(Spawn));
+        }
         //Treat.transform.position += Vector3.up * Random.Range(minHeight, maxHeight);
      }
 

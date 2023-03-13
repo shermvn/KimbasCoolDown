@@ -34,6 +34,10 @@ public class Obstacles : MonoBehaviour
 
         if (transform.position.x < leftEdge - 10)
         {
+           
+        }
+        if (GameBehavior.Instance.CurrentState == State.Title)
+        {
             Destroy(gameObject);
         }
 

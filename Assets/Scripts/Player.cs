@@ -60,11 +60,12 @@ public class Player : MonoBehaviour
                 }
             }
             if (transform.position.y >= -2.08f)
-            { 
-            direction.y += gravity * Time.deltaTime;
-          
+            {
+                direction.y += gravity * Time.deltaTime;
+
             }
-            else {
+            else
+            {
                 transform.position = new Vector3(
                     transform.position.x,
                     -2.08f,
@@ -73,9 +74,14 @@ public class Player : MonoBehaviour
             }
             transform.position += direction * Time.deltaTime;
         }
-       
-        
+        if (GameBehavior.Instance.CurrentState == State.Title)
+        {
+            ResetPlayer();
+        }
     }
+
+
+   
     public void ResetPlayer()
     {
         Vector3 position = transform.position;

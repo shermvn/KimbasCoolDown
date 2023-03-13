@@ -23,7 +23,11 @@ public class PowerUpBehavior : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (GameBehavior.Instance.CurrentState == State.Title)
+        {
+            Destroy(gameObject);
+        }
 
-        //OnTriggerEnter2D();
+      
     }
 }
