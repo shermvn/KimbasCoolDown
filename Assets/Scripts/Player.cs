@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
         Vector3 position = transform.position;
         position.y = 0f;
         transform.position = position;
-        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        transform.localScale = new Vector3(-1.34f, .70f, 0.36f);
         direction = Vector3.zero;
     }
     //Player.SetActive(false);
