@@ -12,7 +12,8 @@ public class GuiBehavior : MonoBehaviour
     // GUI elements to control
     [SerializeField] public TextMeshProUGUI OverGui;
     [SerializeField] public TextMeshProUGUI ScoreGui;
-    
+    [SerializeField] public GameObject Health;
+
 
 
 
@@ -43,12 +44,23 @@ public class GuiBehavior : MonoBehaviour
             GuiElement.gameObject.SetActive(true);
         }
     }
+    public void ToggleHealthVisibility(GameObject Bar)
+    {
+        if (Bar.gameObject.activeSelf)
+        {
+            Bar.gameObject.SetActive(false);
+        }
+        else
+        {
+            Bar.gameObject.SetActive(true);
+        }
+    }
 
     public void UpdateMessageGUI(string message)
     {
         OverGui.text = message;
         //ToggleGUIVisibility(MessageGui);
-        Debug.Log(OverGui.text);
+        //Debug.Log(OverGui.text);
     }
    
 }

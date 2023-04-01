@@ -4,30 +4,34 @@ using UnityEngine;
 
 public class PowerUpBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public float speed = 5f;
-    private float leftEdge;
+    public float rotationSpeed = 100f;
+    public float shrinkSpeed = 0.5f;
+    private float hoverHeight = 0.001f;
+    private float hoverSpeed = 2f;
+    private float startY;
 
-    private void Start()
+
+    private void Update()
     {
-        leftEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).x - 1f;
+        startY = transform.position.y;
+        float newY = startY + Mathf.Sin(Time.time * hoverSpeed) * hoverHeight;
+
+        // Set the GameObject's position to the new position
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
 
-
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        transform.position += Vector3.left * speed * Time.deltaTime;
-
-        if (transform.position.x < leftEdge)
+        // Check if the GameObject collided with another object
+        if (other.gameObject.CompareTag("Player")) // Replace "Player" with the tag of the object you want to collide with
         {
-            Destroy(gameObject);
+            //Obstacles.Instance.AnimOB();
+            // Check if the GameObject has shrunk to nothing
+            if (transform.localScale.x <= 0f)
+            {
+                // Destroy the GameObject
+                Destroy(gameObject);
+            }
         }
-        if (GameBehavior.Instance.CurrentState == State.Title)
-        {
-            Destroy(gameObject);
-        }
-
-      
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameBehavior : MonoBehaviour
 {
@@ -18,7 +19,8 @@ public class GameBehavior : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("Game Over");
+        Debug.Log("no");
+        GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
     }
     private void Awake()
     {
@@ -35,6 +37,7 @@ public class GameBehavior : MonoBehaviour
         GuiBehavior.Instance.UpdateMessageGUI("Press Return to Start");
         GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
         GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.ScoreGui);
+        GuiBehavior.Instance.ToggleHealthVisibility(GuiBehavior.Instance.Health);
         Time.timeScale = 0f;
         CurrentState = State.Title;
 
@@ -53,6 +56,7 @@ public class GameBehavior : MonoBehaviour
                     Time.timeScale = 1f;
                     GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
                     GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.ScoreGui);
+                    GuiBehavior.Instance.ToggleHealthVisibility(GuiBehavior.Instance.Health);
                     CurrentState = State.Play;
                     
                 }
@@ -67,20 +71,34 @@ public class GameBehavior : MonoBehaviour
                     CurrentState = State.Pause;
                    
                 }
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + -1);
+                    //GuiBehavior.Instance.UpdateMessageGUI("Game Over");
+                    //GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
+                    //Time.timeScale = 0f;
+                    //CurrentState = State.GameOver;
+
+                }
                 break;
             case State.GameOver:
-                //Debug.Log(CurrentState);
-                // Display message GUI and title GUI
-                //GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.PlayGui);
-                
-               
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
                     //Player.Instance.ResetPlayer();
                     GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.ScoreGui);
+                    GuiBehavior.Instance.ToggleHealthVisibility(GuiBehavior.Instance.Health);
                     GuiBehavior.Instance.UpdateMessageGUI("Press Return to Start");
                     CurrentState = State.Title;
                    
+                }
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + -1);
+                    //GuiBehavior.Instance.UpdateMessageGUI("Game Over");
+                    //GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
+                    //Time.timeScale = 0f;
+                    //CurrentState = State.GameOver;
+
                 }
                 break;
             case State.Pause:
