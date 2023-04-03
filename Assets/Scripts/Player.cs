@@ -17,6 +17,14 @@ public class Player : MonoBehaviour
     public float gravity = -9.8f;
     public float strength = 5f;
     public float yChange = 0;
+    //private float  ScaleOG = 0.2f;
+    private bool _inCoroutine = false;
+    private Vector3 init = new Vector3(0.2f, 0.2f, 0.2f);
+
+
+
+
+
 
     [SerializeField] float PowerDuration = 5f;
 
@@ -40,7 +48,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI ScoreGUI;
 
-    private void Start()
+    private void StartScore()
     {
         Score = 0;
         
@@ -51,9 +59,11 @@ public class Player : MonoBehaviour
     {
         if (GameBehavior.Instance.CurrentState == State.Play)
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            //if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 direction = Vector3.up * strength;
+                AudioBehavior.Instance.PlaySound(AudioBehavior.Instance.JumpHit, 0.2f);
 
             }
             if (Input.touchCount > 0)
@@ -86,7 +96,7 @@ public class Player : MonoBehaviour
         {
             ResetPlayer();
             ResetCoroutine();
-            Start();
+            StartScore();
         }
         if (GameBehavior.Instance.CurrentState == State.Pause || GameBehavior.Instance.CurrentState == State.GameOver)
         {
@@ -101,7 +111,7 @@ public class Player : MonoBehaviour
         Vector3 position = transform.position;
         position.y = 0;
         transform.position = position;
-        transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        transform.localScale = init;
         direction = Vector3.zero;
     }
     //Player.SetActive(false);
@@ -111,15 +121,16 @@ public class Player : MonoBehaviour
         // Check if the colliding object has a specific tag
         if (collision.CompareTag("Obstacle"))
         {
-            // Destroy the enemy object
 
-            Debug.Log("obstacle");
+
             GuiBehavior.Instance.UpdateMessageGUI("Game Over");
+            AudioBehavior.Instance.PlaySound(AudioBehavior.Instance.DeathHit, 0.2f);
             GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
+            AudioBehavior.Instance.Soundtrack.Pause();
             Time.timeScale = 0f;
             GameBehavior.Instance.CurrentState = State.GameOver;
-            Start();
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + -1);
+            Debug.Log("obstacle");
+            //Start();
 
 
 
@@ -127,17 +138,26 @@ public class Player : MonoBehaviour
         else if (collision.gameObject.CompareTag("Scoring"))
         {
             IncreaseScore();
+            AudioBehavior.Instance.PlaySound(AudioBehavior.Instance.ScoreHit, 0.2f);
+
             //FindObjectOfType<GameBehavior>().IncreaseScore();
         }
-        else if (collision.gameObject.CompareTag("Scaling"))
+        else if (collision.gameObject.CompareTag("Scaling") && !_inCoroutine)
         {
             StartCoroutine(ScaleUp());
+            Debug.Log("Scaled");
+            AudioBehavior.Instance.PlaySound(AudioBehavior.Instance.ScaleHit, 0.2f);
+
             //PowerSpawn.Instance.DestroyPowerup();
             //function that destroys the scurrent soawn
         }
         else if (collision.gameObject.CompareTag("Healing"))
         {
             //Obstacles.Instance.AnimOB();
+            Debug.Log("Healed");
+            AudioBehavior.Instance.PlaySound(AudioBehavior.Instance.HealHit, 0.2f);
+
+
             if (HealthBehavior.Instance.Count <= HealthBehavior.Instance.PowerDown)
             {
                 HealthBehavior.Instance.Count = 0;
@@ -165,12 +185,16 @@ public class Player : MonoBehaviour
         //scalepower
         IEnumerator ScaleUp()
         {
+        _inCoroutine = true;
             //yChange = -1.86f;
             transform.localScale *= 0.5f;
         // number of secs
             yield return new WaitForSeconds(PowerDuration);
-            transform.localScale *= 2f;
-            //yChange = 0;
+        // make a new vector three with o.2 f for each position
+        transform.localScale = init;
+        //transform.localScale = ScaleOG;
+        //yChange = 0;
+        _inCoroutine = false;
 
 
         }
@@ -184,8 +208,10 @@ public class Player : MonoBehaviour
          private void ResetCoroutine()
          {
             StopCoroutine(ScaleUp());
-            //StopCoroutine(HealUp());
-         }
+            ResetPlayer();
+
+        //StopCoroutine(HealUp());
+    }
     }
   
 

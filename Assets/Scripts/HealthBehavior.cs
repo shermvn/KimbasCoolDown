@@ -10,7 +10,7 @@ public class HealthBehavior : MonoBehaviour
 
     // create a get set function count like score in player
     
-    private int _count;
+    private int _count = 0;
     public int Count
     {
         get => _count;
@@ -38,12 +38,15 @@ public class HealthBehavior : MonoBehaviour
                 //Debug.Log(Count);
             }
             //else if (Count == (PowerDown * 4))
-            else if (Count == (2))
+            else if (Count == 24)
 
             {
                 anim.SetTrigger("isBar0");
+                AudioBehavior.Instance.PlaySound(AudioBehavior.Instance.DeathHit, 0.2f);
+
                 GuiBehavior.Instance.UpdateMessageGUI("Game Over");
                 GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
+                AudioBehavior.Instance.Soundtrack.Pause();
                 Time.timeScale = 0f;
                 GameBehavior.Instance.CurrentState = State.GameOver;
             }

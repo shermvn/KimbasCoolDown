@@ -16,7 +16,10 @@ public class StartBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
     public void StartMenu()
     {
@@ -26,10 +29,15 @@ public class StartBehavior : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        StartAudioBehavior.Instance.PlaySound(StartAudioBehavior.Instance.SelectHit, 0.2f);
+
     }
 
     public void InfoMenuGame()
     {
+        StartAudioBehavior.Instance.PlaySound(StartAudioBehavior.Instance.SelectHit, 0.2f);
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+
     }
 }

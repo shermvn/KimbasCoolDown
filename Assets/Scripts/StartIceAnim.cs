@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StartIceAnim : MonoBehaviour
 {
-    [SerializeField] private float hoverHeight = 0.5f;
+    private float hoverHeight = 0.2f;
     float HH = 0f;
 
     public void Awake()

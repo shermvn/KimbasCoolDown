@@ -8,7 +8,8 @@ using System;
 public class GuiBehavior : MonoBehaviour
 {
     // static instance of the GuiBehavior class
-    public static GuiBehavior Instance { get; private set; }
+    public static GuiBehavior Instance;
+    //{ get; private set; }
     // GUI elements to control
     [SerializeField] public TextMeshProUGUI OverGui;
     [SerializeField] public TextMeshProUGUI ScoreGui;
