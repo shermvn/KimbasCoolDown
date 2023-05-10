@@ -20,22 +20,22 @@ public class HealthBehavior : MonoBehaviour
             if (Count < PowerDown)
             {
                 anim.SetTrigger("isBar4");
-                //Debug.Log(Count);
+                Debug.Log(Count);
             }
             else if (Count >= PowerDown && Count < (PowerDown*2))
             {
                 anim.SetTrigger("isBar3");
-                //Debug.Log(Count);
+                Debug.Log(Count);
             }
             else if (Count >= (PowerDown * 2) && Count < (PowerDown * 3))
             {
                 anim.SetTrigger("isBar2");
-                //Debug.Log(Count);
+                Debug.Log(Count);
             }
             else if (Count >= (PowerDown * 3) && Count < (PowerDown * 4))
             {
                 anim.SetTrigger("isBar1");
-                //Debug.Log(Count);
+                Debug.Log(Count);
             }
             //else if (Count == (PowerDown * 4))
             else if (Count == 24)

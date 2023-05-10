@@ -10,14 +10,17 @@ public class PowerUpBehavior : MonoBehaviour
     private float hoverHeight = 1f;
     private float hoverSpeed = 2f;
     private float startY;
+    private float randomOffset;
     private Animator anim;
     void Start()
     {
         // Set the initial y-position of the sprite
         startY = transform.position.y;
         anim = GetComponent<Animator>();
+        randomOffset = Random.Range(0f, 2f);
 
     }
+
     //public void Awake()
     //{
     //    if (Instance != null)
@@ -29,6 +32,7 @@ public class PowerUpBehavior : MonoBehaviour
     //        Instance = this;
     //    }
     //}
+
     private void Anim()
     {
         anim.SetBool("isShrink", true);
@@ -39,8 +43,9 @@ public class PowerUpBehavior : MonoBehaviour
 
     private void Update()
     {
-        float newY = startY + Mathf.Sin(Time.time * hoverSpeed) * hoverHeight;
+        float newY = startY + Mathf.Sin(Time.time + randomOffset) * hoverSpeed;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        randomOffset += Time.deltaTime;
     }
 
 

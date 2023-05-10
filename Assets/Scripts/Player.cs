@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     {
         Score++;
         HealthBehavior.Instance.Count++;
-        Debug.Log(HealthBehavior.Instance.Count);
+        //Debug.Log(HealthBehavior.Instance.Count);
     }
 
     [SerializeField] TextMeshProUGUI ScoreGUI;
