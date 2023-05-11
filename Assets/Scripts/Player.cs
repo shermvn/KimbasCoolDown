@@ -139,7 +139,7 @@ public class Player : MonoBehaviour
         else if (collision.gameObject.CompareTag("Scoring"))
         {
             IncreaseScore();
-            AudioBehavior.Instance.PlaySound(AudioBehavior.Instance.ScoreHit, 0.2f);
+            AudioBehavior.Instance.PlaySound(AudioBehavior.Instance.ScoreHit, 0.1f);
 
             //FindObjectOfType<GameBehavior>().IncreaseScore();
         }
@@ -156,7 +156,7 @@ public class Player : MonoBehaviour
         {
             //Obstacles.Instance.AnimOB();
             Debug.Log("Healed");
-            AudioBehavior.Instance.PlaySound(AudioBehavior.Instance.HealHit, 0.2f);
+            AudioBehavior.Instance.PlaySound(AudioBehavior.Instance.HealHit, 0.3f);
 
 
             if (HealthBehavior.Instance.Count <= HealthBehavior.Instance.PowerDown)
