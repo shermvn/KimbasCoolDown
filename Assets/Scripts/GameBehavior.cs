@@ -37,9 +37,12 @@ public class GameBehavior : MonoBehaviour
         }
         // Changed to Play fromt title
         GuiBehavior.Instance.UpdateMessageGUI("Press Return to Start");
-        GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
-        GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.ScoreGui);
-        GuiBehavior.Instance.ToggleHealthVisibility(GuiBehavior.Instance.Health);
+        //GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
+        GuiBehavior.Instance.ScoreGui.SetActive(false);
+        GuiBehavior.Instance.OverGui.SetActive(true);
+        GuiBehavior.Instance.Health.SetActive(false);
+        //GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.ScoreGui);
+        //GuiBehavior.Instance.ToggleHealthVisibility(GuiBehavior.Instance.Health);
         Time.timeScale = 0f;
         CurrentState = State.Title;
 
@@ -62,9 +65,11 @@ public class GameBehavior : MonoBehaviour
                 {
 
                     Time.timeScale = 1f;
-                    GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
-                    GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.ScoreGui);
-                    GuiBehavior.Instance.ToggleHealthVisibility(GuiBehavior.Instance.Health);
+                    GuiBehavior.Instance.ScoreGui.SetActive(true);
+                    GuiBehavior.Instance.OverGui.SetActive(false);
+                    //GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
+                    //GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.ScoreGui);
+                    GuiBehavior.Instance.Health.SetActive(true);
                     CurrentState = State.Play;
                     AudioBehavior.Instance.Soundtrack.loop = true;
                     AudioBehavior.Instance.Soundtrack.Play();
@@ -84,7 +89,7 @@ public class GameBehavior : MonoBehaviour
                     Time.timeScale = 0f;
                     //Player.Instance.enabled = false;
                     GuiBehavior.Instance.UpdateMessageGUI("Pause");
-                    GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
+                    PlayGUIOff();
                     CurrentState = State.Pause;
                     AudioBehavior.Instance.Soundtrack.Pause();
 
@@ -108,8 +113,9 @@ public class GameBehavior : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
                     //Player.Instance.ResetPlayer();
-                    GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.ScoreGui);
-                    GuiBehavior.Instance.ToggleHealthVisibility(GuiBehavior.Instance.Health);
+                    PlayGUIOff();
+                    //GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.ScoreGui);
+                    //GuiBehavior.Instance.ToggleHealthVisibility(GuiBehavior.Instance.Health);
                     GuiBehavior.Instance.UpdateMessageGUI("Press Return to Start");
                     CurrentState = State.Title;
                    
@@ -131,8 +137,12 @@ public class GameBehavior : MonoBehaviour
                     //Player.Instance.enabled = true;
                     Time.timeScale = 1f;
                     AudioBehavior.Instance.Soundtrack.Play();
-
-                    GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
+                    GuiBehavior.Instance.ScoreGui.SetActive(true);
+                    GuiBehavior.Instance.OverGui.SetActive(false);
+                    //GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
+                    //GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.ScoreGui);
+                    GuiBehavior.Instance.Health.SetActive(true);
+                    //GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
                     CurrentState = State.Play;
                 }
                 if (Input.GetKeyDown(KeyCode.Q))
@@ -144,6 +154,14 @@ public class GameBehavior : MonoBehaviour
                     break;
         }
     }
+    public void PlayGUIOff()
+    {
+        GuiBehavior.Instance.ScoreGui.SetActive(false);
+        GuiBehavior.Instance.Health.SetActive(false);
+        GuiBehavior.Instance.OverGui.SetActive(true);
 
-    
+
+    }
+
+
 }

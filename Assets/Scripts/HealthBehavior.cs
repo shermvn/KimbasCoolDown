@@ -45,7 +45,8 @@ public class HealthBehavior : MonoBehaviour
                 AudioBehavior.Instance.PlaySound(AudioBehavior.Instance.DeathHit, 0.2f);
 
                 GuiBehavior.Instance.UpdateMessageGUI("Game Over");
-                GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
+                GuiBehavior.Instance.OverGui.SetActive(true);
+                //GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
                 AudioBehavior.Instance.Soundtrack.Pause();
                 Time.timeScale = 0f;
                 GameBehavior.Instance.CurrentState = State.GameOver;

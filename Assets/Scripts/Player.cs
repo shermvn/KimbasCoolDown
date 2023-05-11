@@ -125,7 +125,8 @@ public class Player : MonoBehaviour
 
             GuiBehavior.Instance.UpdateMessageGUI("Game Over");
             AudioBehavior.Instance.PlaySound(AudioBehavior.Instance.DeathHit, 0.2f);
-            GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
+            GuiBehavior.Instance.OverGui.SetActive(true);
+            //GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
             AudioBehavior.Instance.Soundtrack.Pause();
             Time.timeScale = 0f;
             GameBehavior.Instance.CurrentState = State.GameOver;

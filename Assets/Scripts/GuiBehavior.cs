@@ -11,8 +11,9 @@ public class GuiBehavior : MonoBehaviour
     public static GuiBehavior Instance;
     //{ get; private set; }
     // GUI elements to control
-    [SerializeField] public TextMeshProUGUI OverGui;
-    [SerializeField] public TextMeshProUGUI ScoreGui;
+    [SerializeField] public GameObject OverGui;
+    [SerializeField] public TextMeshProUGUI OverTextGui;
+    [SerializeField] public GameObject ScoreGui;
     [SerializeField] public GameObject Health;
 
 
@@ -30,7 +31,8 @@ public class GuiBehavior : MonoBehaviour
         {
             Instance = this;
         }
-        ToggleGUIVisibility(OverGui);
+        //ToggleGUIVisibility(OverGui);
+
     }
 
     // toggle visibility of a given GUI element
@@ -59,7 +61,7 @@ public class GuiBehavior : MonoBehaviour
 
     public void UpdateMessageGUI(string message)
     {
-        OverGui.text = message;
+        OverTextGui.text = message;
         //ToggleGUIVisibility(MessageGui);
         //Debug.Log(OverGui.text);
     }

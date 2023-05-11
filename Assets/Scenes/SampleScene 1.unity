@@ -1882,8 +1882,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a175ee63d85d453e879d0a2785f32f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OverGui: {fileID: 1389383627}
-  ScoreGui: {fileID: 1179170752}
+  OverGui: {fileID: 1389383625}
+  OverTextGui: {fileID: 1389383627}
+  ScoreGui: {fileID: 1179170750}
   Health: {fileID: 1501431850}
 --- !u!1 &1306191997
 GameObject:

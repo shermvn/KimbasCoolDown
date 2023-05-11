@@ -17,7 +17,8 @@ public class ButtonBehavior : MonoBehaviour
         Time.timeScale = 0f;
         //Player.Instance.enabled = false;
         GuiBehavior.Instance.UpdateMessageGUI("Pause");
-        GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
+        GuiBehavior.Instance.OverGui.SetActive(true);
+        //GuiBehavior.Instance.ToggleGUIVisibility(GuiBehavior.Instance.OverGui);
         GameBehavior.Instance.CurrentState = State.Pause;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
